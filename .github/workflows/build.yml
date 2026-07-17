@@ -19,17 +19,16 @@ jobs:
           distribution: 'temurin'
 
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x gradlew || true
 
-      - name: Generate Gradle wrapper jar if missing
+      - name: Download and install Gradle 8.8
         run: |
-          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
-            sudo apt-get update && sudo apt-get install -y gradle
-            gradle wrapper --gradle-version 8.8
-          fi
+          wget -q https://services.gradle.org/distributions/gradle-8.8-bin.zip -P /tmp
+          sudo unzip -q -d /opt/gradle /tmp/gradle-8.8-bin.zip
+          echo "/opt/gradle/gradle-8.8/bin" >> $GITHUB_PATH
 
       - name: Build with Gradle
-        run: ./gradlew build --stacktrace
+        run: gradle build --stacktrace
 
       - name: Upload built mod jar
         uses: actions/upload-artifact@v4
