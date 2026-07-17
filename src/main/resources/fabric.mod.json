@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "autofish",
+  "version": "${version}",
+  "name": "AutoFish",
+  "description": "Auto-pêche : clic droit avec une canne pour activer, elle récupère et relance automatiquement le poisson jusqu'à ce que tu retires la canne toi-même.",
+  "authors": [
+    "Toi"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.example.autofish.AutoFishMod"
+    ]
+  },
+  "mixins": [
+    "autofish.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
